@@ -55,7 +55,7 @@ A controlled Windows service installation was used to generate Event ID 7045 and
 
 | Event ID | Description |
 |---|---|
-| 4624 | Successful account login |
+| 4624 | Successful account logon |
 | 4625 | Failed account login |
 | 4688 | New process created |
 | 4720 | User account created |
