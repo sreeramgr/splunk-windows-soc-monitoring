@@ -1,8 +1,8 @@
-/* 1. Encoded PowerShell Execution Detected */
+/ 1. Encoded PowerShell Execution Detected /
 index=soc_lab source="*Sysmon*" "<EventID>1</EventID>" "EncodedCommand"
 
 
-/* 2. Repeated Failed Windows Logins Detected */
+/ 2. Repeated Failed Windows Logins Detected /
 index=soc_lab source="WinEventLog:Security" EventCode=4625 earliest=-5m@m latest=@m
 | eval TargetAccount=mvindex(Account_Name,-1)
 | stats count AS FailedAttempts earliest(_time) AS FirstAttempt latest(_time) AS LastAttempt values(Failure_Reason) AS FailureReason by host TargetAccount
@@ -11,7 +11,7 @@ index=soc_lab source="WinEventLog:Security" EventCode=4625 earliest=-5m@m latest
 | sort - FailedAttempts
 
 
-/* 3. Windows User Account Activity Detected */
+/ 3. Windows User Account Activity Detected /
 index=soc_lab source="WinEventLog:Security" (EventCode=4720 OR EventCode=4726)
 | eval SubjectUserName=mvindex(Account_Name,0)
 | eval TargetUserName=mvindex(Account_Name,-1)
@@ -23,7 +23,7 @@ index=soc_lab source="WinEventLog:Security" (EventCode=4720 OR EventCode=4726)
 | sort - _time
 
 
-/* 4. Local Administrators Group Changed */
+/ 4. Local Administrators Group Changed /
 index=soc_lab source="WinEventLog:Security" (EventCode=4732 OR EventCode=4733) Group_Name="Administrators"
 | eval Activity=case(
     EventCode=4732, "Member added to Administrators",
@@ -33,7 +33,7 @@ index=soc_lab source="WinEventLog:Security" (EventCode=4732 OR EventCode=4733) G
 | sort - _time
 
 
-/* 5. Suspicious Windows Utility Execution */
+/ 5. Suspicious Windows Utility Execution /
 index=soc_lab source="*Sysmon*" "<EventID>1</EventID>"
 | rex field=_raw "<Data Name='Image'>(?<ProcessImage>[^<]+)"
 | rex field=_raw "<Data Name='CommandLine'>(?<CommandLine>[^<]+)"
@@ -50,7 +50,7 @@ index=soc_lab source="*Sysmon*" "<EventID>1</EventID>"
 | sort - _time
 
 
-/* 6. New Windows Service Installed */
+/ 6. New Windows Service Installed /
 index=soc_lab source="WinEventLog:System" EventCode=7045
 | table _time host EventCode Service_Name Service_File_Name Service_Type Service_Start_Type
 | sort - _time
