@@ -25,9 +25,9 @@ The Windows SOC Monitoring Dashboard provides:
 - Windows events by log source
 - Shared time-range filtering
 
-![Dashboard Overview](screenshots/01-dashboard-overview.png)
+![Dashboard Overview](screenshots/19-dashboard%20overview.png)
 
-![Detection Dashboard](screenshots/02-dashboard-detections.png)
+![Detection Dashboard](screenshots/20-dashboard-detections.png)
 
 ## Detection Alerts
 
@@ -47,9 +47,9 @@ The alert SPL queries are available in
 
 A controlled Windows service installation was used to generate Event ID 7045 and validate the New Windows Service Installed detection. The event was successfully forwarded, indexed, displayed on the dashboard, and recorded as a triggered alert.
 
-![Triggered Alerts](screenshots/03-triggered-alerts.png)
+![Triggered Alerts](screenshots/21-triggered-alerts.png)
 
-![Enabled Alerts](screenshots/04-enabled-alerts.png)
+![Enabled Alerts](screenshots/22-enabled-alerts.png)
 
 ## Key Event IDs
 
